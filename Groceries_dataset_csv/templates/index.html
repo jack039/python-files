@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Basket Analysis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        async function loadVisualizations() {
+            let response = await fetch('/get-visualizations');
+            let data = await response.json();
+            document.getElementById('bar_chart').src = data.bar_chart;
+            document.getElementById('pie_chart').src = data.pie_chart;
+            document.getElementById('scatterplot').src = data.scatterplot;
+            document.getElementById('heatmap').src = data.heatmap;
+        }
+        window.onload = loadVisualizations;
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+        }
+        .navbar {
+            padding: 15px;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background: red;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .offers-btn {
+            margin-left: auto;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .modal-content img {
+            width: 100%;
+            height: auto;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Responsive Modal Image */
+        @media only screen and (max-width: 700px) {
+            .modal-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark d-flex">
+        <div class="container">
+            <a class="navbar-brand" href="#">Market Basket Analysis</a>
+            <a href="/offers" class="btn btn-warning offers-btn">📢 View Special Offers</a>
+        </div>
+    </nav>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Market Basket Analysis Visualizations</h1>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Top 10 Purchased Items - Bar Chart</h2>
+                        <img id="bar_chart" src="" alt="Bar Chart" class="img-fluid chart-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Top 10 Purchased Items - Pie Chart</h2>
+                        <img id="pie_chart" src="" alt="Pie Chart" class="img-fluid chart-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Scatter Plot of Top 10 Items</h2>
+                        <img id="scatterplot" src="" alt="Scatter Plot" class="img-fluid chart-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Heatmap of Co-occurring Items</h2>
+                        <img id="heatmap" src="" alt="Heatmap" class="img-fluid chart-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // JavaScript for image modal
+        const images = document.querySelectorAll('.chart-image');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close');
+
+        images.forEach(img => {
+            img.addEventListener('click', function() {
+                modal.style.display = 'block';
+                modalImg.src = this.src;
+            });
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

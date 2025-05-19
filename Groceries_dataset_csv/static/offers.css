@@ -1,0 +1,110 @@
+/*  Modern Gradient Background */
+body {
+    background: linear-gradient(to right, #2e2e2e, #1c1c1c);
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: white;
+    overflow-x: hidden;
+}
+
+/*  Title Styling */
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/*  Offers Container */
+.container {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center everything */
+    align-items: center;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 20px;
+}
+
+/*  Glassmorphism Offer Cards */
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    min-width: 280px;
+    max-width: 300px;
+    flex: 1 1 calc(25% - 20px); /* 4 per row */
+    margin-bottom: 20px; /* Add margin to separate cards */
+}
+
+/*  Card Hover Effects */
+.card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+}
+
+/*  Card Text */
+.card h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f8f8f8;
+    text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.3);
+}
+
+/*  Card Shine Effect */
+.card::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 50%);
+    transform: rotate(-25deg);
+    transition: all 0.5s ease-in-out;
+}
+
+.card:hover::before {
+    top: 0%;
+    left: 0%;
+}
+
+/*  Responsive Design */
+@media (max-width: 1200px) {
+    .card {
+        flex: 1 1 calc(33.333% - 20px); /* 3 per row */
+    }
+}
+
+@media (max-width: 900px) {
+    .card {
+        flex: 1 1 calc(50% - 20px); /* 2 per row */
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .card {
+        flex: 1 1 100%; /* 1 per row */
+    }
+}
+
+/*  Smooth Fade-in Animation */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}

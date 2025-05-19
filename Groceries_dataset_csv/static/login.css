@@ -1,0 +1,67 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+    color: white;
+    margin: 0;
+}
+
+/* Login Box */
+.login-container {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+    text-align: center;
+    width: 350px;
+}
+
+/* Headings */
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: #00aaff;
+}
+
+/* Input Fields */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: #f8f1f1;
+    color: rgb(10, 10, 10);
+    font-size: 16px;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #00aaff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #0077cc;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+    .login-container {
+        width: 90%;
+    }
+}
